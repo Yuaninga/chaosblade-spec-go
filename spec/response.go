@@ -117,6 +117,18 @@ var (
 	SystemdNotFound                   = CodeType{66001, "`%s`: systemd not found, err: %v"}
 	DatabaseError                     = CodeType{67001, "`%s`: failed to execute, err: %v"}
 	DataNotFound                      = CodeType{67002, "`%s` record not found, if it's k8s experiment, please add --target k8s flag to retry"}
+	RedisPingError                    = CodeType{67011, "redis ping error: %s"}
+	ParseDurationError                = CodeType{67012, "parse duration error: %s"}
+	RedisGetAllKeysError              = CodeType{67013, "redis get all keys error: %s"}
+	RedisExpireKeyError               = CodeType{67014, "redis expire key error: %s"}
+	RedisExpireKeyFailed              = CodeType{67015, "redis expire key failed"}
+	RedisGetMaxMemoryError            = CodeType{67016, "redis get maxmemory error: %s"}
+	RedisSetMaxMemoryError            = CodeType{67017, "redis set maxmemory error: %s"}
+	SentinelFlushConfigError          = CodeType{67018, "sentinel flush config error: %s"}
+	RedisShutdownError                = CodeType{67019, "redis shutdown error: %s"}
+	RedisPipeExecError                = CodeType{67020, "redis pipe exec error: %s"}
+	StrParseFloatError                = CodeType{67021, "string parse float error: %s"}
+	StringToIntError                  = CodeType{67022, "string to int error: %s"}
 )
 
 func (c CodeType) Sprintf(values ...interface{}) string {
@@ -177,7 +189,7 @@ func Success() *Response {
 	return ReturnSuccess(nil)
 }
 
-//ToString
+// ToString
 func (response *Response) ToString() string {
 	bytes, err := json.MarshalIndent(response, "", "\t")
 	if err != nil {
